@@ -1,0 +1,36 @@
+group 'com.mentoring'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
+    }
+
+}
+
+dependencies {
+    /* SPRING */
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    /* DB */
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
+    /* UTILITY */
+    providedCompile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
