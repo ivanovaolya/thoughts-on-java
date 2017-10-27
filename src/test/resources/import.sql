@@ -1,3 +1,3 @@
-INSERT INTO users VALUES (1, 'Olya', 'olya.ivanova@gmail.com');
-INSERT INTO users VALUES (2, 'Vasya', 'vasya.pupkin@gmail.com');
-INSERT INTO users VALUES (3, 'Ivan', 'ivan.ivanov@gmail.com');
+INSERT INTO users(id, birth_date, email, name) VALUES (1, '1995-07-20', 'olya.ivanova@gmail.com', 'Olya');
+INSERT INTO users(id, birth_date, email, name) VALUES (2, '2012-01-01', 'vasya12354@gmail.com', 'Vasya');
+INSERT INTO users(id, birth_date, email, name) VALUES (3, '2012-01-01', 'ivan2354@gmail.com', 'Ivan');

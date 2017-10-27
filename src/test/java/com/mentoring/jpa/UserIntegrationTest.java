@@ -1,5 +1,8 @@
 package com.mentoring.jpa;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import javax.persistence.EntityManager;
 
 import com.mentoring.jpa.model.User;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -34,6 +38,14 @@ public class UserIntegrationTest {
         User user = em.find(User.class, 1L);
         assertNotNull(user);
         logger.info(user.toString());
+    }
+
+    @Test
+    public void testJavaDateApiWithHibernate() {
+        User user = em.find(User.class, 1L);
+        logger.info(user.toString());
+
+        assertEquals(LocalDate.of(1995, Month.JULY, 20), user.getBirthDate());
     }
 
 }

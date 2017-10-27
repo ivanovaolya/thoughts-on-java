@@ -28,6 +28,9 @@ dependencies {
     /* SPRING */
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    /* for persisting Java Date API objects with Hibernate */
+    /** since Hibernate 5.1 this dependency included into hibernate-core */
+    compile group: 'org.hibernate', name: 'hibernate-java8', version: '5.0.12.Final'
     /* DB */
     testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
     /* UTILITY */
