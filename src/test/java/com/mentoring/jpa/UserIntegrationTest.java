@@ -2,9 +2,11 @@ package com.mentoring.jpa;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -92,4 +94,23 @@ public class UserIntegrationTest {
 
         assertEquals(result, 3L);
     }
+
+    @Test
+    public void testTupleWithCriteriaQuery() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Tuple> tupleQuery = cb.createTupleQuery();
+        Root<User> root = tupleQuery.from(User.class);
+        tupleQuery.multiselect(root.get("name").alias("n"),
+                                root.get("email").alias("e"));
+
+        List<Tuple> tuples = em.createQuery(tupleQuery).getResultList();
+
+        tuples.forEach(t -> {
+            assertNotNull(t.get("n"));
+            assertNotNull(t.get("e"));
+            logger.info(String.format("Name: %s, email: %s", t.get("n"), t.get("e")));
+        });
+
+    }
+
 }
