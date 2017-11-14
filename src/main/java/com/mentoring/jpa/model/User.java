@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ import org.hibernate.annotations.Formula;
 @Table(name = "users")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "addresses")
 public class User {
 
     @Id
@@ -41,6 +42,14 @@ public class User {
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    @ElementCollection
+    private List<String> phones;
+
+    /*Hibernate: create table user_phones (
+        user_user_id bigint not null,
+        phones varchar(255)
+    )*/
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

@@ -21,7 +21,6 @@ import org.junit.runner.RunWith;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -134,5 +133,19 @@ public class UserIntegrationTest {
         User user = em.find(User.class, 1L);
         assertEquals(900.0d, user.getRate(), DELTA);
         assertEquals(24147.0d, user.getSalary(), DELTA);
+    }
+
+    @Test
+    public void testUserPhonesLikeElementCollection() throws Exception {
+        User user = em.find(User.class, 1L);
+        user.getPhones().add("101");
+
+        em.persist(user);
+
+        final User notCachedUser = em.createQuery("SELECT u FROM User u WHERE u.id = :id", User.class)
+                .setParameter("id", 1L).getSingleResult();
+        notCachedUser.getPhones().add("102");
+
+        em.persist(notCachedUser);
     }
 }
