@@ -1,18 +1,21 @@
 package com.mentoring.jpa.model;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,6 +29,8 @@ import javax.persistence.Table;
 @Setter
 @EqualsAndHashCode
 @ToString(exclude = "user")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
 
     @Id
@@ -41,6 +46,10 @@ public class Address {
 
     @Column(name = "postal_code")
     private String postalCode;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private AddressType addressType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
