@@ -59,4 +59,8 @@ public class User {
     @MapKeyEnumerated(EnumType.STRING)
     private Map<AddressType, Address> addresses;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "dep_id")
+    private Department department;
+
 }
