@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Formula;
+
 /**
  * @author ivanovaolyaa
  * @version 10/17/2017
@@ -30,6 +32,12 @@ public class User {
 
     @Column
     private String email;
+
+    @Column
+    private Double rate;
+
+    @Formula("rate * 26.83")
+    private Double salary;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;

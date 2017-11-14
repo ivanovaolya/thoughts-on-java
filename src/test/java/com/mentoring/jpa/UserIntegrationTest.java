@@ -126,4 +126,13 @@ public class UserIntegrationTest {
                 .setParameter("id", 1L).getSingleResult();
         assertEquals(UserStatus.ACTIVE, notCachedUser.getUserStatus());
     }
+
+    @Test
+    public void testUserAgeWithHibernateFormula() throws Exception {
+        final double DELTA = 1e-15;
+
+        User user = em.find(User.class, 1L);
+        assertEquals(900.0d, user.getRate(), DELTA);
+        assertEquals(24147.0d, user.getSalary(), DELTA);
+    }
 }
