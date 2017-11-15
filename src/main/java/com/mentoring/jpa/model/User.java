@@ -63,4 +63,8 @@ public class User {
     @JoinColumn(name = "dep_id")
     private Department department;
 
+    public boolean isActive() {
+        return userStatus.equals(UserStatus.ACTIVE);
+    }
+
 }

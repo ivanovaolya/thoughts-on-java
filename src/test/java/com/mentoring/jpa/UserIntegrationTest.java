@@ -117,13 +117,12 @@ public class UserIntegrationTest {
     @Test
     public void testPersistEnumValue() {
         User user = em.find(User.class, 1L);
-        assertNull(user.getUserStatus());
-        user.setUserStatus(UserStatus.ACTIVE);
+        user.setUserStatus(UserStatus.INACTIVE);
 
         em.persist(user);
         final User notCachedUser = em.createQuery("SELECT u FROM User u WHERE u.id = :id", User.class)
                 .setParameter("id", 1L).getSingleResult();
-        assertEquals(UserStatus.ACTIVE, notCachedUser.getUserStatus());
+        assertEquals(UserStatus.INACTIVE, notCachedUser.getUserStatus());
     }
 
     @Test
