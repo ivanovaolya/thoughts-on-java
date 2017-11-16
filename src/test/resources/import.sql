@@ -6,3 +6,5 @@ INSERT INTO addresses(address_id, city, street, postal_code, type, user_id) VALU
 INSERT INTO addresses(address_id, city, street, postal_code, type, user_id) VALUES (2, 'Kyiv', 'Virmenskya', '04452', 'HOME', 1);
 INSERT INTO addresses(address_id, city, street, postal_code, type, user_id) VALUES (3, 'Lviv', 'Peremogy', '12314', 'WORK', 2);
 
+INSERT INTO departments(dep_id, name) VALUES (uuid(), 'Java Solutions 1');
+INSERT INTO departments(dep_id, name) VALUES (uuid(), 'Java Solutions 2');

@@ -1,8 +1,11 @@
 package com.mentoring.jpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 
 import com.mentoring.jpa.model.Department;
 import com.mentoring.jpa.model.User;
@@ -14,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -32,6 +36,7 @@ public class DepartmentIntegrationTest {
     public void testDepartmentUuidGeneration() throws Exception {
         final User user = em.find(User.class, 1L);
         final Department department = new Department();
+        department.setName("Java Solutions 2");
         em.persist(department);
 
         user.setDepartment(department);
@@ -44,4 +49,12 @@ public class DepartmentIntegrationTest {
         logger.info("Generated UUID: " + notCachedUser.getDepartment().getId());
     }
 
+    @Test
+    public void testDepartmentNativeSqlQueryWithResultMapping() throws Exception {
+        final List<Department> departments = em.createNativeQuery("select d.dep_id, d.name from departments d",
+                "DepartmentValueMapping").getResultList();
+
+        assertEquals(2, departments.size());
+        departments.forEach(d -> logger.info("ID: " + d.getId() + "; Name: " + d.getName()));
+    }
 }
